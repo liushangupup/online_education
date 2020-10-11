@@ -25,7 +25,7 @@ public class OssServiceImpl implements OssService {
 
         try {
             // 创建OSS实例。
-                       OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+            OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
             //获取上传文件输入流
             InputStream inputStream = file.getInputStream();
@@ -33,9 +33,9 @@ public class OssServiceImpl implements OssService {
             String fileName = file.getOriginalFilename();
 
             //1 在文件名称里面添加随机唯一的值
-            String uuid = UUID.randomUUID().toString().replaceAll("-","");
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             // yuy76t5rew01.jpg
-            fileName = uuid+fileName;
+            fileName = uuid + fileName;
 
             //2 把文件按照日期进行分类
             //获取当前日期
@@ -43,13 +43,13 @@ public class OssServiceImpl implements OssService {
             String datePath = new DateTime().toString("yyyy/MM/dd");
             //拼接
             //  2019/11/12/ewtqr313401.jpg
-            fileName = datePath+"/"+fileName;
+            fileName = datePath + "/" + fileName;
 
             //调用oss方法实现上传
             //第一个参数  Bucket名称
             //第二个参数  上传到oss文件路径和文件名称   aa/bb/1.jpg
             //第三个参数  上传文件输入流
-            ossClient.putObject(bucketName,fileName , inputStream);
+            ossClient.putObject(bucketName, fileName, inputStream);
 
             // 关闭OSSClient。
             ossClient.shutdown();
@@ -57,9 +57,9 @@ public class OssServiceImpl implements OssService {
             //把上传之后文件路径返回
             //需要把上传到阿里云oss路径手动拼接出来
             //  https://edu-guli-1010.oss-cn-beijing.aliyuncs.com/01.jpg
-            String url = "https://"+bucketName+"."+endpoint+"/"+fileName;
+            String url = "https://" + bucketName + "." + endpoint + "/" + fileName;
             return url;
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
