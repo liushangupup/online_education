@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.atguigu"})
 @MapperScan("com.atguigu.educenter.mapper")
+
 public class UcenterApplication {
 
     public static void main(String[] args) {
